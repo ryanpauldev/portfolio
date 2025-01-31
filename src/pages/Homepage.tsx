@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet-async";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import Home from "../components/Home";
-import Skills from "../components/Skills";
+/*import Skills from "../components/Skills";
 import Portfolio from "../components/Portfolio";
-import Contact from "../components/Contact";
+import Contact from "../components/Contact";*/
 import Footer from "../components/Footer";
 
 export default function Homepage({
@@ -54,7 +54,7 @@ export default function Homepage({
         menu={["Home"]}
       />
       {/* menu={["Home", "Skills", "Portfolio", "Contact"]} */}
-      
+
       <Home
         h2Title="Hello, I'm"
         h1Title="Ryan Paul"
