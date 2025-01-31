@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import Navbar from "../components/Navbar";
-import Home from "../components/Home";
+import Navbar from "./Navbar";
+import Home from "./Home";
 /*import Skills from "../components/Skills";
 import Portfolio from "../components/Portfolio";
 import Contact from "../components/Contact";*/
-import Footer from "../components/Footer";
+import Footer from "./Footer";
 
-export default function Homepage({
+export default function Hero({
   theme,
   setTheme,
 }: {
@@ -35,9 +35,9 @@ export default function Homepage({
         <title>Ryan Paul</title>
         <meta
           name="description"
-          content="I am a Software and Web Engineer. This is my portfolio website."
+          content="I am a Software Engineer and Web Developer. This is my portfolio website."
         />
-        <link rel="icon" href="/HomepageLogo.png" />
+        <link rel="icon" href="/HeroLogo.png" />
         <link rel="canonical" href="https://ryanpaul.dev/" />
       </Helmet>
 
@@ -50,7 +50,7 @@ export default function Homepage({
           marginRight:
             "mr-[1rem] 2sm:mr-[4rem] sm:mr-[6rem] md:mr-[4rem] lg:mr-[8rem] xl:mr-[14rem] 2xl:mr-[20rem]",
         }}
-        logoPath="/HomepageLogo.png"
+        logoPath="/HeroLogo.png"
         menu={["Home"]}
       />
       {/* menu={["Home", "Skills", "Portfolio", "Contact"]} */}
@@ -60,7 +60,7 @@ export default function Homepage({
         h1Title="Ryan Paul"
         typedInfo={{
           textBefore: "A",
-          strings: ["Software Engineer", "Web Engineer"],
+          strings: ["Software Engineer", "Web Developer", "Code Wrangler", "Bug Hunter", "Stack Overflower", "Pixel Pusher", "Dev Ninja", "Digital Blacksmith"],
           typeSpeed: 80,
           backSpeed: 50,
           backDelay: 2000,
