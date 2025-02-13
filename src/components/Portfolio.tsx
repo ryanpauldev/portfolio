@@ -35,6 +35,44 @@ export default function Portfolio() {
           >
             Gabby's Goats
           </Project>
+          <Project
+            image="gabbys_goats.png"
+            description="Fundraising Platform"
+            techStack="React, Typescript, Tailwind, Stripe"
+            buttons={[
+              {
+                name: "Website",
+                image: TbWorldWww,
+                link: "https://gabbys-goats.vercel.app/",
+              },
+              {
+                name: "GitHub",
+                image: FaGithub,
+                link: "https://github.com/ryanpauldev/gabbys_goats",
+              },
+            ]}
+          >
+            Gabby's Goats
+          </Project>
+          <Project
+            image="gabbys_goats.png"
+            description="Fundraising Platform"
+            techStack="React, Typescript, Tailwind, Stripe"
+            buttons={[
+              {
+                name: "Website",
+                image: TbWorldWww,
+                link: "https://gabbys-goats.vercel.app/",
+              },
+              {
+                name: "GitHub",
+                image: FaGithub,
+                link: "https://github.com/ryanpauldev/gabbys_goats",
+              },
+            ]}
+          >
+            Gabby's Goats
+          </Project>
 
         </div>
       </div>
