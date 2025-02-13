@@ -1,5 +1,4 @@
 import { useEffect, useRef, ReactNode } from "react";
-import { Link } from "react-scroll";
 import { IconContext } from "react-icons";
 import Typed from "typed.js";
 
@@ -25,7 +24,7 @@ export default function Home({
     to: string;
     text: string;
   } | null;
-  externalLinks: Array<{ link: string; image: any; text: string }>;
+  externalLinks: Array<{ link: string; image?: any; text: string }>;
 }) {
   const typedElem = useRef(null);
 
@@ -81,17 +80,19 @@ export default function Home({
             externalLinks.length >= 2 ? "gap-x-4" : "gap-x-0"
           } mt-8 grid place-items-center gap-y-4 2sm:flex 2sm:gap-6 lg:gap-8`}
         >
-          {internalLink && internalLink.to && (
-            <Link
-              to={internalLink.to}
-              offset={-60}
+
+          {internalLink && (
+            <a
+              href={internalLink.to}
+              target="_blank"
+              rel="noopener noreferrer"
               className="col-span-2 my-2 cursor-pointer items-center rounded-xl border-2 border-highlight p-[10px] text-sm font-semibold text-text duration-300 hover:border-highlight hover:bg-highlight sm:p-[14px] lg:text-base"
-              smooth={true}
-              duration={400}
             >
               {internalLink.text}
-            </Link>
+            </a>
           )}
+
+
 
           {externalLinks &&
             externalLinks.map((link: any) => (
