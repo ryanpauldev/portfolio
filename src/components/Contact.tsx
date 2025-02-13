@@ -3,45 +3,51 @@ import emailjs from "@emailjs/browser";
 
 export default function Contact({ title }: { title: ReactNode }) {
   const [messageResult, setMessageResult] = useState("");
+  const [loading, setLoading] = useState(false);
+  const form = useRef<HTMLFormElement | null>(null);
 
-  const form = useRef(null);
-
-  function handleSubmit(e: any): void {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
+    setLoading(true);
 
-    emailjs
-      .sendForm(
-        "service_csks0d8",
-        "template_l4aoenf",
-        form.current!,
-        "tkKxnFTTTampSyr3G",
-      )
-      .then((result) => {
-        setMessageResult(
-          result.status === 200
-            ? "Message sent successfully"
-            : "There was an error. Try again later",
-        );
+    if (!form.current) return;
 
-        setTimeout(function () {
-          setMessageResult("");
-        }, 5000);
-      });
+    // Extract form values manually
+    const formData = new FormData(form.current);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const result = await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID, // Service ID
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID, // Template ID
+        data, // ✅ Send extracted form data
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY // Public key
+      );
+
+      if (result.status === 200) {
+        setMessageResult("Message sent successfully ✅");
+        form.current.reset(); // ✅ Clear form after submission
+      } else {
+        throw new Error("Failed to send message.");
+      }
+    } catch (error) {
+      setMessageResult("There was an error. Please try again later ❌");
+      console.error("EmailJS Error:", error);
+    } finally {
+      setLoading(false);
+      setTimeout(() => setMessageResult(""), 5000);
+    }
   }
 
+
   return (
-    <section
-      id="contact"
-      className="h-screen min-h-[800px] w-full bg-primary p-8"
-    >
-      {/* Container */}
+    <section id="contact" className="h-screen min-h-[800px] w-full bg-primary p-8">
       <div className="mx-auto flex h-full max-w-fit flex-col items-center justify-center">
-        {/* Form */}
-        <form
-          className="text-center sm:w-[500px] md:w-[600px]"
-          ref={form}
-          onSubmit={(e) => handleSubmit(e)}
-        >
+        <form className="text-center sm:w-[500px] md:w-[600px]" ref={form} onSubmit={handleSubmit}>
           {title && (
             <h2 className="inline text-3xl font-bold text-text 2sm:text-4xl lg:text-6xl">
               {title}
@@ -68,33 +74,24 @@ export default function Contact({ title }: { title: ReactNode }) {
 
           {/* Message */}
           <textarea
-            className="h-[250px] w-[100%] rounded-lg border-2 border-highlight bg-primary p-4 font-medium text-text duration-300 focus:border-text focus:outline-none focus:ring-0"
+            className="h-[250px] w-full rounded-lg border-2 border-highlight bg-primary p-4 font-medium text-text duration-300 focus:border-text focus:outline-none focus:ring-0"
             placeholder="Message"
             name="message"
             required
           />
 
-          <p
-            className={
-              messageResult.includes("successfully")
-                ? "mb-[-1rem] mt-4 text-green-600"
-                : "mb-[-1rem] mt-4 text-red-600"
-            }
-          >
+          <p className={`mb-4 mt-4 ${messageResult.includes("successfully") ? "text-green-600" : "text-red-600"}`}>
             {messageResult}
           </p>
 
-          {/* Button */}
+          {/* Submit Button */}
           <button
-            className={
-              messageResult
-                ? "hidden"
-                : "mx-auto my-8 flex items-center rounded-lg border-2 border-highlight px-4 py-3 font-semibold text-text duration-300 hover:bg-highlight"
-            }
+            className={`mx-auto my-8 flex items-center rounded-lg border-2 border-highlight px-4 py-3 font-semibold text-text duration-300 hover:bg-highlight ${loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             type="submit"
-            value="Send"
+            disabled={loading}
           >
-            Send Message
+            {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
       </div>
