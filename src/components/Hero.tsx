@@ -53,7 +53,6 @@ export default function Hero({
         logoPath="/HeroLogo.png"
         menu={["Home", "Portfolio", "Contact"]}
       />
-        menu={["Home", "Skills", "Portfolio", "Contact"]}
 
       <Home
         h2Title="Hello, I'm"

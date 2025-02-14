@@ -18,7 +18,7 @@ export default function Portfolio() {
         <div className="mx-14 grid grid-cols-1 gap-16 py-8 text-center md:grid-cols-2 lg:mx-0 xl:grid-cols-3">
           <Project
             image="gabbys_goats.png"
-            description="Fundraising Platform"
+            description="Fundraising Platform for Charitable Organization"
             techStack="React, Typescript, Tailwind, Stripe"
             buttons={[
               {
@@ -34,6 +34,26 @@ export default function Portfolio() {
             ]}
           >
             Gabby's Goats
+          </Project>
+
+          <Project
+            image="youtube_metadata_generator.png"
+            description="AI-Powered Metadata Generator for Youtube Creators"
+            techStack="Vite, React, CSS, Node.js, OpenAI"
+            buttons={[
+              {
+                name: "Website",
+                image: TbWorldWww,
+                link: "https://youtube-metadata-generator.vercel.app/",
+              },
+              {
+                name: "GitHub",
+                image: FaGithub,
+                link: "https://github.com/ryanpauldev/youtube_metadata_generator",
+              },
+            ]}
+          >
+            Youtube Metadata Generator
           </Project>
         </div>
       </div>
